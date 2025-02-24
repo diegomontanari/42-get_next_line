@@ -1,5 +1,4 @@
 # 42-get_next_line
-
 In this project, we will learn:
 
 - What static variables are,  
