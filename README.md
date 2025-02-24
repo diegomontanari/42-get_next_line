@@ -82,7 +82,7 @@ The main difference between a macro and a variable in C lies in how they are han
 
 ---  
 
-## Now, the following functions have very clear names, so I'll go quickly:
+Now, the following functions have very clear names, so I'll go quickly:
 
 The process is as follows:
 
