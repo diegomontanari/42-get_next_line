@@ -82,74 +82,31 @@ The main difference between a macro and a variable in C lies in how they are han
 
 ---  
 
-```c
-if (check_newline(buffer))
-```
+## Now, the following functions have very clear names, so I'll go quickly:
 
-`check_newline(buffer)` checks if there is a newline character (`\n`) in the buffer.  
-If there is a newline, it executes the `if` block; otherwise, it moves to the next part.  
+The process is as follows:
 
-```c
-line = extract_line(buffer);
-```
+The code reads a file line by line using a buffer to store the data read. When it finds a newline character (`\n`), it extracts and returns the line. If the buffer doesn't yet contain a full line, it reads more data from the file until it forms the line.
 
-`extract_line(buffer)` extracts the first line contained in the buffer (up to and including the first `\n`).  
+### Step-by-step explanation:
 
-```c
-buffer = fix_buffer(buffer);
-```
+1. **Checks if there is already a complete line in the buffer**  
+   - If the buffer contains at least one `\n`, it extracts the first line and removes it from the buffer.  
+   - If, after removal, the buffer is empty, it reloads more data from the file.  
+   - It returns the extracted line.
 
-`fix_buffer(buffer)` updates the buffer by removing the extracted line, leaving only the remaining content (what comes after `\n`).  
+2. **If the buffer doesn't contain `\n`, it reads more data from the file**  
+   - If the reading fails (end of file or error), it returns `NULL`.  
+   - If the reading succeeds, it extracts the line from the buffer and updates it.
 
-```c
-if (!buffer)
-    buffer = create_buffer(fd, buffer);
-```
+3. **At the end, it returns the extracted line.**
 
-If the buffer is empty after removing the line, it is reloaded with new data from `fd` using `create_buffer(fd, buffer)`.  
+### In short:
+- If the buffer already has a complete line, it extracts and returns it.  
+- If the buffer is incomplete, it reads more data from the file.  
+- If there's nothing left to read, it returns `NULL`.  
+- It continues like this until the file is completely read.
 
-```c
-return (line);
-```
-
-If there was a `\n` in the initial buffer, the function returns the extracted line and terminates.  
-
-**Case when there is no `\n` in the buffer**  
-If no `\n` is found, then the code proceeds:  
-
-```c
-buffer = create_buffer(fd, buffer);
-```
-
-Reloads the buffer by reading more data from the file descriptor `fd`.  
-
-```c
-if (!buffer)
-    return (NULL);
-```
-
-If reading produced nothing (e.g., EOF or error), the function returns `NULL`, indicating there are no more lines to read.  
-
-```c
-line = extract_line(buffer);
-buffer = fix_buffer(buffer);
-```
-
-If the buffer still has data:  
-- Extracts a new line with `extract_line(buffer)`.  
-- Removes the extracted line from the buffer with `fix_buffer(buffer)`.  
-
-```c
-return (line);
-```
-
-Returns the extracted line.  
-
-**Summary of How It Works:**  
-- If the buffer already has a `\n`, it extracts the line, updates the buffer, and immediately returns the line.  
-- If there is no `\n`, it reads more data from the file (`create_buffer`).  
-- If reading produces nothing, it returns `NULL`.  
-- If reading is successful, it extracts the line, updates the buffer, and returns it.  
 
 ## Sources and Further Reading  
 
