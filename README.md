@@ -125,6 +125,17 @@ return (line);                         // Return the extracted line
 - It continues like this until the file is completely read.
 
 
+## Alcune cose che vale spefificare:
+
+
+
+
+
+## E il bonus? Spiegazione funzionamento.
+
+
+
+
 ## Sources and Further Reading  
 
 [Video Explanation](https://www.youtube.com/watch?v=8E9siq7apUU)
