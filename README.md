@@ -74,6 +74,8 @@ It is a definition in the C preprocessor that replaces a name with a value or a 
 **Difference between Macro and Variable:**  
 The main difference between a macro and a variable in C lies in how they are handled by the compiler and their impact on performance and memory.  
 
+(foto tabella che devo mettere da chat gpt)
+
 *Use a macro if you need to define a constant (e.g., `#define PI 3.1415`).*  
 *Use a variable if the value might change during execution or if a specific type is needed.*  
 *For numeric constants, it is better to use `const` instead of `#define` (`const int BUFFER_SIZE = 1024;`), because it provides better type control and facilitates debugging.*  
