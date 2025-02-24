@@ -84,7 +84,7 @@ The main difference between a macro and a variable in C lies in how they are han
 
 Now, the following functions have very clear names, so I'll go quickly:
 
-The process is as follows:
+## The process is as follows:
 
 The code reads a file line by line using a buffer to store the data read. When it finds a newline character (`\n`), it extracts and returns the line. If the buffer doesn't yet contain a full line, it reads more data from the file until it forms the line.
 
