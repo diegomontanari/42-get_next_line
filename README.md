@@ -89,20 +89,20 @@ Now, the following functions have very clear names, so I'll go quickly:
 The code reads a file line by line using a buffer to store the data read. When it finds a newline character (`\n`), it extracts and returns the line. If the buffer doesn't yet contain a full line, it reads more data from the file until it forms the line.
 
 ```c
-if (check_newline(buffer))
-{
-    line = extract_line(buffer);
-    buffer = fix_buffer(buffer);
-    if (!buffer)
-        buffer = create_buffer(fd, buffer);
-    return (line);
+if (check_newline(buffer)) {                 // Check if the buffer already contains a newline character
+    line = extract_line(buffer);             // Extract the first line (up to and including the newline)
+    buffer = fix_buffer(buffer);             // Remove the extracted line from the buffer, leaving the remaining content
+    if (!buffer)                             // If the buffer becomes empty after removal,
+        buffer = create_buffer(fd, buffer);  // refill it from the file descriptor
+    return (line);                           // Return the extracted line
 }
-buffer = create_buffer(fd, buffer);
-if (!buffer)
-    return (NULL);
-line = extract_line(buffer);
-buffer = fix_buffer(buffer);
-return (line);
+buffer = create_buffer(fd, buffer);          // If no newline is found, refill the buffer with data from the file descriptor
+if (!buffer)                                 // If the buffer is empty after refilling (EOF or error),
+    return (NULL);                           // return NULL
+line = extract_line(buffer);                 // Extract the line from the updated buffer
+buffer = fix_buffer(buffer);                 // Remove the extracted line, updating the buffer with any remaining data
+return (line);                               // Return the extracted line
+
 ```
 
 ### Step-by-step explanation:
