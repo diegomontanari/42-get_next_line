@@ -1,9 +1,9 @@
 # 42-get_next_line
 In this project, we will learn:
 
-- What static variables are,  
-- How files are opened, read, and closed in an OS,  
-- How files are interpreted by a programming language.  
+- What static variables are 
+- How files are opened, read, and closed in an OS  
+- How files are interpreted by a programming language 
 
 **NOTE:** Since this is a 42 school project, I must follow their norm.  
 
